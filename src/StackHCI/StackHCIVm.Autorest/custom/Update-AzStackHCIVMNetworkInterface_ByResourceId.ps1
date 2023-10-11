@@ -1,6 +1,6 @@
 
 function Update-AzStackHciVMNetworkInterface_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.INetworkInterfaces])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.INetworkInterfaces])]
 [CmdletBinding(PositionalBinding=$false)]
 
 param(
@@ -13,7 +13,7 @@ param(
 
     
     [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IGalleryImagesUpdateRequestTags]))]
+    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IGalleryImagesUpdateRequestTags]))]
     [System.Collections.Hashtable]
     # Resource tags
     ${Tags},

@@ -49,7 +49,7 @@ INPUTOBJECT <IStackHciVMIdentity>: Identity Parameter
 .Link
 https://learn.microsoft.com/powershell/module/az.stackhcivm/remove-azstackhcivmvirtualnetwork
 #>
-function Remove-AzStackHciVMVirtualNetwork {
+<# function Remove-AzStackHciVMVirtualNetwork {
     [OutputType([System.Boolean])]
     [CmdletBinding(PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     param(
@@ -199,4 +199,4 @@ function Remove-AzStackHciVMVirtualNetwork {
     }
     
 }
-    
+     #>

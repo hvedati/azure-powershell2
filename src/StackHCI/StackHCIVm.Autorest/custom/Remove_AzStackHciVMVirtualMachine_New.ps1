@@ -55,11 +55,11 @@ function Remove-AzStackHciVMVirtualMachine {
     param(
         [Parameter(ParameterSetName='ByName',Mandatory)]
         [Alias('VirtualMachineName')]
-        [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Path')]
+        [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
         [System.String]
         # Name of the virtual machine
         ${Name},
-    
+
         [Parameter(ParameterSetName='ByName',Mandatory)]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Path')]
         [System.String]
@@ -74,7 +74,7 @@ function Remove-AzStackHciVMVirtualMachine {
         [System.String]
         # The ID of the target subscription.
         ${SubscriptionId},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Path')]
@@ -82,7 +82,7 @@ function Remove-AzStackHciVMVirtualMachine {
         # Identity Parameter
         # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
         ${InputObject},
-    
+
         [Parameter(ParameterSetName='ByResourceId',Mandatory)]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Path')]
         [System.String]
@@ -101,21 +101,21 @@ function Remove-AzStackHciVMVirtualMachine {
         [System.Management.Automation.PSObject]
         # The credentials, account, tenant, and subscription used for communication with Azure.
         ${DefaultProfile},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Runtime')]
         [System.Management.Automation.SwitchParameter]
         # Run the command as a job
         ${AsJob},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Runtime')]
         [System.Management.Automation.SwitchParameter]
         # Wait for .NET debugger to attach
         ${Break},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [ValidateNotNull()]
@@ -132,21 +132,21 @@ function Remove-AzStackHciVMVirtualMachine {
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Runtime.SendAsyncStep[]]
         # SendAsync Pipeline Steps to be prepended to the front of the pipeline
         ${HttpPipelinePrepend},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Runtime')]
         [System.Management.Automation.SwitchParameter]
         # Run the command asynchronously
         ${NoWait},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Microsoft.Azure.PowerShell.Cmdlets.StackHCIVm.Category('Runtime')]
         [System.Management.Automation.SwitchParameter]
         # Returns true when the command succeeds
         ${PassThru},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Parameter(DontShow)]
@@ -154,7 +154,7 @@ function Remove-AzStackHciVMVirtualMachine {
         [System.Uri]
         # The URI for the proxy server to use
         ${Proxy},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Parameter(DontShow)]
@@ -163,7 +163,7 @@ function Remove-AzStackHciVMVirtualMachine {
         [System.Management.Automation.PSCredential]
         # Credentials for a proxy server to use for the remote call
         ${ProxyCredential},
-    
+
         [Parameter(ParameterSetName='ByName')]
         [Parameter(ParameterSetName='ByResourceId')]
         [Parameter(DontShow)]
@@ -171,35 +171,44 @@ function Remove-AzStackHciVMVirtualMachine {
         [System.Management.Automation.SwitchParameter]
         # Use the default credentials for the proxy
         ${ProxyUseDefaultCredentials}
+    
     )
    
     process {
-
         Write-Warning("Running this command will delete the virtual machine.")
-
-        if ($PSCmdlet.ParameterSetName -eq "ByResourceId"){
-            if ($ResourceId -match $vmRegex){
-                
-                $subscriptionId = $($Matches['subscriptionId'])
-                $resourceGroupName = $($Matches['resourceGroupName'])
-                $resourceName = $($Matches['vmName'])
-                $null = $PSBoundParameters.Remove("ResourceId")
-                $PSBoundParameters.Add("Name", $resourceName)
-                $PSBoundParameters.Add("ResourceGroupName", $resourceGroupName)
-                $null = $PSBoundParameters.Remove("SubscriptionId")
-                $PSBoundParameters.Add("SubscriptionId", $subscriptionId)
-
-            } else {             
-                Write-Error "Resource ID is invalid: $ResourceId" -ErrorAction Stop
-            }   
-        }
-
-        if ($PSCmdlet.ShouldProcess($PSBoundParameters['Name']) -and ($Force -or $PSCmdlet.ShouldContinue("Delete this virtual machine?", "Confirm")))
+        if ($Force -or $PSCmdlet.ShouldContinue("Delete this virtual machine?", "Confirm"))
         {
-            if ($PSBoundParameters.ContainsKey("Force")) {
-                $null = $PSBoundParameters.Remove("Force")
+            if ($PSCmdlet.ParameterSetName -eq "ByResourceId"){
+                if ($ResourceId -match $vmRegex) {
+                    $SubscriptionId = $($Matches['subscriptionId'])
+                    $ResourceGroupName = $($Matches['resourceGroupName'])
+                    $Name = $($Matches['machineName'])
+                    $resourceUri = "/subscriptions/" + $subscriptionId + "/resourceGroups/" + $resourceGroupName + "/providers/Microsoft.HybridCompute/machines/" + $Name
+                } else {   
+                    Write-Error "Resource ID is invalid: $ResourceId" -ErrorAction Stop
+                }
             }
+            if ($PSCmdlet.ParameterSetName -eq "ByName"){
+                if ($SubscriptionId  && $ResourceGroupName && $Name){
+                    $resourceUri = "/subscriptions/" + $SubscriptionId + "/resourceGroups/" + $ResourceGroupName + "/providers/Microsoft.HybridCompute/machines/" + $Name
+                } else {   
+                    Write-Error "One or more input parameters are invalid. Name is $name, resource group name is $resourcegroupname, subscription id is $subscriptionid"
+                }
+            }
+
+            $null = $PSBoundParameters.Remove("ResourceId")
+            $null = $PSBoundParameters.Remove("Name")
+            $null = $PSBoundParameters.Remove("SubscriptionId")
+            $null = $PSBoundParameters.Remove("ResourceGroupName")
+            $null = $PSBoundParameters.Remove("Force")
+            $PSBoundParameters.Add("ResourceUri", $resourceUri)
             Az.StackHciVM.internal\Remove-AzStackHciVMVirtualMachine @PSBoundParameters
+
+            $PSBoundParameters.Add("SubscriptionId", $SubscriptionId)
+            $PSBoundParameters.Add("ResourceGroupName", $ResourceGroupName)
+            $PSBoundParameters.Add("Name", $Name)
+            $null = $PSBoundParameters.Remove("ResourceUri")
+            Az.StackHciVM\Remove-AzStackHciVMMachine @PSBoundParameters  
         }
     }
 }

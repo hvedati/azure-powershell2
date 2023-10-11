@@ -27,7 +27,7 @@ Please note some properties can be set only during virtual machine creation.
 {{ Add code here }}
 
 .Outputs
-Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IVirtualMachines
+Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IVirtualMachineInstance
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -50,536 +50,610 @@ WINDOWSCONFIGURATIONSSHPUBLICKEY <IVirtualMachinePropertiesOSProfileWindowsConfi
 https://learn.microsoft.com/powershell/module/az.StackHciVM/new-azStackHciVMvirtualmachine
 #>
 function New-AzStackHciVMVirtualMachine {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IVirtualMachines])]
-[CmdletBinding(PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-param(
-    [Parameter(Mandatory)]
-    [Alias('VirtualMachineName')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
-    [System.String]
-    # Name of the virtual machine
-    ${Name},
-
-    [Parameter(Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
-    [System.String]
-    # The name of the resource group.
-    # The name is case insensitive.
-    ${ResourceGroupName},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.DefaultInfo(Script='(Get-AzContext).Subscription.Id')]
-    [System.String]
-    # The ID of the target subscription.
-    ${SubscriptionId},
-
-    [Parameter(Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # The geo-location where the resource lives
-    ${Location},
-
-    [Parameter(Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # The name of the extended location.
-    ${CustomLocationId},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Int64]
-    # Maximum Dynamic Memory
-    ${DynamicMemoryMaximumMemory},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Int64]
-    # Minimum Dynamic Memory
-    ${DynamicMemoryMinimumMemory},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Int32]
-    # Defines the amount of extra memory that should be reserved for a virtual machine at runtime, as a percentage of the total memory that the virtual machine is thought to need.
-    # This only applies to virtual systems with dynamic memory enabled.
-    # This property can be in the range of 5 to 2000.
-    ${DynamicMemoryTargetBuffer},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Int64]
-    # RAM in MB for the virtual machine
-    ${VmMemory},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Int32]
-    # Number of processors for the virtual machine
-    ${VmProcessors},
-
-    [Parameter()]
-    [ArgumentCompleter([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.VMSizeEnum])]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.VMSizeEnum]
-    # Size of the VM. Can be predefined size or Custom. 
-    ${VmSize},
-
-    [Parameter()]
-    [ArgumentCompleter([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.ResourceIdentityType])]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.ResourceIdentityType]
-    # The identity type.
-    ${IdentityType},
-
-    [Parameter(ParameterSetName='ByImageId', Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Resource ID of the image to create the VM with. 
-    ${ImageId}, 
-
-    [Parameter(ParameterSetName='ByImageName',Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Name of the image to create the VM with. 
-    ${ImageName},
-
-    [Parameter(ParameterSetName='ByImageName')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Resource group of the image to create the VM from. 
-    ${ImageResourceGroup},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # DisablePasswordAuthentication - whether password authentication should be disabled
-    ${DisablePasswordAuthentication},
-
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process.
-    ${ProvisionVMAgent},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String[]]
-    # NetworkInterfaces - list of network interfaces to be attached to the virtual machine in ARM Id format. 
-    ${NicIds},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String[]]
-    # NetworkInterfaces - list of network interfaces to be attached to the virtual machine in name format. 
-    ${NicNames},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # NetworkInterfaces - Resource Group of Network Interfaces. 
-    ${NicResourceGroup},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String[]]
+  [OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IVirtualMachineInstance])]
+  [CmdletBinding(PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+  param(
+      [Parameter(Mandatory)]
+      [Alias('VirtualMachineName')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
+      [System.String]
+      # Name of the virtual machine
+      ${Name},
     
-    # Data Disks - List of data disks to be attached to the virtual machine in id format. 
-    ${DataDiskIds},
+      [Parameter(Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
+      [System.String]
+      # The name of the resource group.
+      # The name is case insensitive.
+      ${ResourceGroupName},
 
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String[]]
-    # Data Disks - List of data disks to be attached to the virtual machine in name format .
-    ${DataDiskNames},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Path')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.DefaultInfo(Script='(Get-AzContext).Subscription.Id')]
+      [System.String]
+      # The ID of the target subscription.
+      ${SubscriptionId},
 
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Data Disks - Resource Group of Data Disks. 
-    ${DataDiskResourceGroup},
+      [Parameter(Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # The geo-location where the resource lives
+      ${Location},
 
-    [Parameter(ParameterSetName='ByOsDiskId',Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Resource ID of the OS disk
-    ${OSDiskId},
+      [Parameter(Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # The name of the extended location.
+      ${CustomLocationId},
 
-    [Parameter(ParameterSetName='ByOsDiskName',Mandatory)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Name of the OS disk
-    ${OSDiskName},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Int64]
+      # Maximum Dynamic Memory
+      ${DynamicMemoryMaximumMemory},
 
-    [Parameter(ParameterSetName='ByOsDiskName')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Resource Group of the OS disk
-    ${OSDiskResourceGroup},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Int64]
+      # Minimum Dynamic Memory
+      ${DynamicMemoryMinimumMemory},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # AdminPassword - admin password
-    ${AdminPassword},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Int32]
+      # Defines the amount of extra memory that should be reserved for a virtual machine at runtime, as a percentage of the total memory that the virtual machine is thought to need.
+      # This only applies to virtual systems with dynamic memory enabled.
+      # This property can be in the range of 5 to 2000.
+      ${DynamicMemoryTargetBuffer},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # AdminUsername - admin username
-    ${AdminUsername},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Int64]
+      # RAM in MB for the virtual machine
+      ${VmMemory},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # ComputerName - name of the computer
-    ${ComputerName},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Int32]
+      # Number of processors for the virtual machine
+      ${VmProcessors},
 
-    [Parameter(Mandatory)]
-    [ArgumentCompleter([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.OSTypeEnum])]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.OSTypeEnum]
-    # OsType - string specifying whether the OS is Linux or Windows
-    ${OsType},
+      [Parameter()]
+      [ArgumentCompleter([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.VMSizeEnum])]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.VMSizeEnum]
+      # Size of the VM. Can be predefined size or Custom. 
+      ${VmSize},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Used to indicate whether or not to enable TPM
-    ${EnableTpm},
+      [Parameter()]
+      [ArgumentCompleter([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.ResourceIdentityType])]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Support.ResourceIdentityType]
+      # The identity type.
+      ${IdentityType},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String[]]
-    # PublicKeys - The list of SSH public keys used to authenticate with VMs
-    ${SshPublicKeys},
+      [Parameter(ParameterSetName='ByImageId', Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Resource ID of the image to create the VM with. 
+      ${ImageId}, 
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Id of the storage container that hosts the VM configuration file
-    ${StoragePathId},
+      [Parameter(ParameterSetName='ByImageName',Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Name of the image to create the VM with. 
+      ${ImageName},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Name of the storage container that hosts the VM configuration file
-    ${StoragePathName},
+      [Parameter(ParameterSetName='ByImageName')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Resource group of the image to create the VM from. 
+      ${ImageResourceGroup},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # Storage Container resource group. The resource group of the virtual machine will be used if this value is not provided. 
-    ${StoragePathResourceGroup},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Management.Automation.SwitchParameter]
+      # DisablePasswordAuthentication - whether password authentication should be disabled
+      ${DisablePasswordAuthentication},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api30.ITrackedResourceTags]))]
-    [System.Collections.Hashtable]
-    # Resource tags.
-    ${Tags},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Management.Automation.SwitchParameter]
+      # Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process.
+      ${ProvisionVMAgent},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Specifies whether secure boot should be enabled on the virtual machine.
-    ${SecureBootEnabled},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String[]]
+      # NetworkInterfaces - list of network interfaces to be attached to the virtual machine in ARM Id format. 
+      ${NicIds},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Specifies Whether to EnableAutomaticUpdates on the machine.
-    ${EnableAutomaticUpdate},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String[]]
+      # NetworkInterfaces - list of network interfaces to be attached to the virtual machine in name format. 
+      ${NicNames},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [System.String]
-    # TimeZone for the virtual machine
-    ${TimeZone},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # NetworkInterfaces - Resource Group of Network Interfaces. 
+      ${NicResourceGroup},
 
-    [Parameter()]
-    [Alias('AzureRMContext', 'AzureCredential')]
-    [ValidateNotNull()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Azure')]
-    [System.Management.Automation.PSObject]
-    # The credentials, account, tenant, and subscription used for communication with Azure.
-    ${DefaultProfile},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String[]]
+      # Data Disks - List of data disks to be attached to the virtual machine in id format. 
+      ${DataDiskIds},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Run the command as a job
-    ${AsJob},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String[]]
+      # Data Disks - List of data disks to be attached to the virtual machine in name format .
+      ${DataDiskNames},
 
-    [Parameter(DontShow)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Wait for .NET debugger to attach
-    ${Break},
+      [Parameter()]
+      [AllowEmptyCollection()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Data Disks - Resource Group of Data Disks. 
+      ${DataDiskResourceGroup},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.SendAsyncStep[]]
-    # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+      [Parameter(ParameterSetName='ByOsDiskId',Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Resource ID of the OS disk
+      ${OSDiskId},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.SendAsyncStep[]]
-    # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+      [Parameter(ParameterSetName='ByOsDiskName',Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Name of the OS disk
+      ${OSDiskName},
 
-    [Parameter()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Run the command asynchronously
-    ${NoWait},
+      [Parameter(ParameterSetName='ByOsDiskName')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Resource Group of the OS disk
+      ${OSDiskResourceGroup},
 
-    [Parameter(DontShow)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Uri]
-    # The URI for the proxy server to use
-    ${Proxy},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # AdminPassword - admin password
+      ${AdminPassword},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Management.Automation.PSCredential]
-    # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # AdminUsername - admin username
+      ${AdminUsername},
 
-    [Parameter(DontShow)]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
-)
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # ComputerName - name of the computer
+      ${ComputerName},
+
+      [Parameter(Mandatory)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # OsType - string specifying whether the OS is Linux or Windows
+      ${OsType},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Management.Automation.SwitchParameter]
+      # Used to indicate whether or not to enable TPM
+      ${EnableTpm},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String[]]
+      # PublicKeys - The list of SSH public keys used to authenticate with VMs
+      ${SshPublicKeys},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Id of the storage container that hosts the VM configuration file
+      ${StoragePathId},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Name of the storage container that hosts the VM configuration file
+      ${StoragePathName},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # Storage Container resource group. The resource group of the virtual machine will be used if this value is not provided. 
+      ${StoragePathResourceGroup},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api30.ITrackedResourceTags]))]
+      [System.Collections.Hashtable]
+      # Resource tags.
+      ${Tags},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Management.Automation.SwitchParameter]
+      # Specifies whether secure boot should be enabled on the virtual machine.
+      ${SecureBootEnabled},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.Management.Automation.SwitchParameter]
+      # Specifies Whether to EnableAutomaticUpdates on the machine.
+      ${EnableAutomaticUpdate},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
+      [System.String]
+      # TimeZone for the virtual machine
+      ${TimeZone},
+
+      [Parameter()]
+      [Alias('AzureRMContext', 'AzureCredential')]
+      [ValidateNotNull()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Azure')]
+      [System.Management.Automation.PSObject]
+      # The credentials, account, tenant, and subscription used for communication with Azure.
+      ${DefaultProfile},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Management.Automation.SwitchParameter]
+      # Run the command as a job
+      ${AsJob},
+
+      [Parameter(DontShow)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Management.Automation.SwitchParameter]
+      # Wait for .NET debugger to attach
+      ${Break},
+
+      [Parameter(DontShow)]
+      [ValidateNotNull()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.SendAsyncStep[]]
+      # SendAsync Pipeline Steps to be appended to the front of the pipeline
+      ${HttpPipelineAppend},
+
+      [Parameter(DontShow)]
+      [ValidateNotNull()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.SendAsyncStep[]]
+      # SendAsync Pipeline Steps to be prepended to the front of the pipeline
+      ${HttpPipelinePrepend},
+
+      [Parameter()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Management.Automation.SwitchParameter]
+      # Run the command asynchronously
+      ${NoWait},
+
+      [Parameter(DontShow)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Uri]
+      # The URI for the proxy server to use
+      ${Proxy},
+
+      [Parameter(DontShow)]
+      [ValidateNotNull()]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Management.Automation.PSCredential]
+      # Credentials for a proxy server to use for the remote call
+      ${ProxyCredential},
+
+      [Parameter(DontShow)]
+      [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Runtime')]
+      [System.Management.Automation.SwitchParameter]
+      # Use the default credentials for the proxy
+      ${ProxyUseDefaultCredentials}
+  )
 
     #name 
-    if ($Name -notmatch $vmNameRegex){
+    if ($Name -notmatch $machineNameRegex){
       Write-Error "Invalid Name:  $Name. The name must start with an alphanumeric character, contain all alphanumeric characters or '-' or '_' or '.' and end with an alphanumeric character. The max length is 64 characters." -ErrorAction Stop
     }
 
     if ($CustomLocationId -notmatch $customLocationRegex){
-        Write-Error "Invalid CustomLocationId: $CustomLocationId" -ErrorAction Stop
+      Write-Error "Invalid CustomLocationId: $CustomLocationId" -ErrorAction Stop
     }
-     
+    
+    $PSBoundParameters.Add("Kind", "HCI")
+    $null = $PSBoundParameters.Remove("DynamicMemoryMaximumMemory") 
+    $null = $PSBoundParameters.Remove("DynamicMemoryMinimumMemory") 
+    $null = $PSBoundParameters.Remove("DynamicMemoryTargetBuffer") 
+    $null = $PSBoundParameters.Remove("VmMemory")
+    $null = $PSBoundParameters.Remove("VmProcessors")
+    $null = $PSBoundParameters.Remove("VmSize") 
+    $null = $PSBoundParameters.Remove("NicIds") 
+    $null = $PSBoundParameters.Remove("NicNames")
+    $null = $PSBoundParameters.Remove("NicResourceGroup")
+    $null = $PSBoundParameters.Remove("CustomLocationId") 
+    $null = $PSBoundParameters.Remove("ImageId") 
+    $null = $PSBoundParameters.Remove("ImageName")
+    $null = $PSBoundParameters.Remove("ImageResourceGroup") 
+    $null = $PSBoundParameters.Remove("DisablePasswordAuthentication") 
+    $null = $PSBoundParameters.Remove("ProvisionVMAgent")
+    $null = $PSBoundParameters.Remove("DataDiskIds") 
+    $null = $PSBoundParameters.Remove("DataDiskNames") 
+    $null = $PSBoundParameters.Remove("DataDiskResourceGroup") 
+    $null = $PSBoundParameters.Remove("OSDiskId") 
+    $null = $PSBoundParameters.Remove("OSDiskName") 
+    $null = $PSBoundParameters.Remove("OSDiskResourceGroup")
+    $null = $PSBoundParameters.Remove("AdminPassword") 
+    $null = $PSBoundParameters.Remove("AdminUsername")
+    $null = $PSBoundParameters.Remove("ComputerName") 
+    $null = $PSBoundParameters.Remove("EnableTpm") 
+    $null = $PSBoundParameters.Remove("SshPublicKeys") 
+    $null = $PSBoundParameters.Remove("SecureBootEnabled") 
+    $null = $PSBoundParameters.Remove("StoragePathResourceGroup")
+    $null = $PSBoundParameters.Remove("StoragePathName")
+    $null = $PSBoundParameters.Remove("StoragePathId")
+    $null = $PSBoundParameters.Remove("EnableAutomaticUpdate")
+    $null = $PSBoundParameters.Remove("TimeZone")
+    $null = $PSBoundParameters.Remove("NoWait")
+    $null = $PSBoundParameters.Remove("AsJob")
+
+    Az.StackHciVM\New-AzStackHciVMMachine @PSBoundParameters 
+
     if ($PSCmdlet.ParameterSetName -eq "ByImageId"){
-      
-        if($ImageId -notmatch $marketplaceGalImageRegex -and $ImageId -notmatch $galImageRegex){
-          Write-Error "Invalid ImageId: $ImageId" -ErrorAction Stop
-        }
+      if($ImageId -notmatch $marketplaceGalImageRegex -and $ImageId -notmatch $galImageRegex){
+        Write-Error "Invalid ImageId: $ImageId" -ErrorAction Stop
+      }
     } elseif ($PSCmdlet.ParameterSetName -eq "ByImageName"){
-          $rg = $ResourceGroupName
-          if($ImageResourceGroup){
-            $rg = $ImageResourceGroup
-          }
-          $isGalleryImage = $false
-          $isMarketplaceGalleryImage = $false
-          
-          $galImage = Az.StackHciVM.internal\Get-AzStackHciVMGalleryImage -Name $ImageName -ResourceGroupName $rg -SubscriptionId $subscriptionId
-          if($galImage -eq $null){
-            $marketplaceGalImage = Az.StackHciVM.internal\Get-AzStackHciVMMarketplaceGalleryImage -Name $ImageName -ResourceGroupName $rg -SubscriptionId $subscriptionId
-            if ($marketplacegalImage -eq $null){
-              Write-Error "An Image with name: $ImageName does not exist in Resource Group: $rg" -ErrorAction Stop
-            } else {
-              $isMarketplaceGalleryImage = $true
-            }
-
-          } else{
-            $isGalleryImage = $true 
-          }
-         
-          if ($isGalleryImage){
-            $ImageId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/galleryimages/$ImageName"
-          } else {
-            $ImageId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/$ImageName"
-          }
-
-          $PSBoundParameters.Add('ImageId', $ImageId)
-          $null = $PSBoundParameters.Remove("ImageResourceGroup")
-          $null = $PSBoundParameters.Remove("ImageName")
-
-    } elseif ($PSCmdlet.ParameterSetName -eq "ByOsDiskId"){      
-        if($OSDiskId -notmatch $vhdRegex){
-          Write-Error "Invalid OSDiskId : $OSDiskId" -ErrorAction Stop
+        $rg = $ResourceGroupName
+        if($ImageResourceGroup){
+          $rg = $ImageResourceGroup
         }
-    } elseif ($PSCmdlet.ParameterSetName -eq "ByOsDiskName"){
-        if ($OSDiskResourceGroup){
-            $OSDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$OSDiskResourceGroup/providers/Microsoft.AzureStackHCI/virtualharddisks/$OSDiskName"
+        $isGalleryImage = $false
+        $isMarketplaceGalleryImage = $false
+      
+      $galImage = Az.StackHciVM.internal\Get-AzStackHciVMGalleryImage -Name $ImageName -ResourceGroupName $rg -SubscriptionId $subscriptionId
+      if($galImage -eq $null){
+        $marketplaceGalImage = Az.StackHciVM.internal\Get-AzStackHciVMMarketplaceGalleryImage -Name $ImageName -ResourceGroupName $rg -SubscriptionId $subscriptionId
+        if ($marketplacegalImage -eq $null){
+          Write-Error "An Image with name: $ImageName does not exist in Resource Group: $rg" -ErrorAction Stop
         } else {
-            $OSDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.AzureStackHCI/virtualharddisks/$OSDiskName"
+          $isMarketplaceGalleryImage = $true
         }
-        $PSBoundParameters.Add('OSDiskId', $OSDiskId)
-        $null = $PSBoundParameters.Remove("OSDiskResourceGroup")
-        $null = $PSBoundParameters.Remove("OSDiskName")
-        
-    } else {
-        Write-Error "Either Image or OS Disk is required. " -ErrorAction Stop
-    }
+      
+      } else{
+        $isGalleryImage = $true 
+        }
 
-    if ($VmSize){
-      if($VmSize.ToString().ToLower() -eq "default"){
-        Write-Error "Invalid VM Size provided. 'Default' is not a supported VmSize." -ErrorAction Stop
-      }
-      if($VmSize.ToString().ToLower() -eq "custom"){
-        if (-Not ($VmProcessors -and $VmMemory)){
-          Write-Error "VmMemory and VmProcessors required for Custom VmSize" -ErrorAction Stop
+        if ($isGalleryImage){
+          $ImageId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/galleryimages/$ImageName"
+        } else {
+          $ImageId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/$ImageName"
         }
+
+        $null = $PSBoundParameters.Remove("ImageResourceGroup")
+        $null = $PSBoundParameters.Remove("ImageName")
+
+  } elseif ($PSCmdlet.ParameterSetName -eq "ByOsDiskId"){      
+      if($OSDiskId -notmatch $vhdRegex){
+        Write-Error "Invalid OSDiskId : $OSDiskId" -ErrorAction Stop
+      }
+  } elseif ($PSCmdlet.ParameterSetName -eq "ByOsDiskName"){
+      if ($OSDiskResourceGroup){
+          $OSDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$OSDiskResourceGroup/providers/Microsoft.AzureStackHCI/virtualharddisks/$OSDiskName"
       } else {
-          if ($VmProcessors -or $VmMemory){
-            Write-Error "VmMemory and VmProcessors will be ignored. Please specify Custom for VMSize." -ErrorAction Continue
-            $null = $PSBoundParameters.Remove("VmProcessors")
-            $null = $PSBoundParameters.Remove("VmMemory")
-          }
+          $OSDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.AzureStackHCI/virtualharddisks/$OSDiskName"
       }
-    }
+      $PSBoundParameters.Add('OSDiskId', $OSDiskId)
+      $null = $PSBoundParameters.Remove("OSDiskResourceGroup")
+      $null = $PSBoundParameters.Remove("OSDiskName")
+      
+  } else {
+      Write-Error "Either Image or OS Disk is required. " -ErrorAction Stop
+  }
 
-    if ($NicIds){
-      $NetworkProfileNetworkInterface =  [System.Collections.ArrayList]::new()
-      foreach ($NicId in $NicIds){
-        if ($NicId -notmatch $nicRegex){
-          Write-Error "Invalid Nic Id provided: $NicId." -ErrorAction Stop
+  if ($VmSize){
+    if($VmSize.ToString().ToLower() -eq "default"){
+      Write-Error "Invalid VM Size provided. 'Default' is not a supported VmSize." -ErrorAction Stop
+    }
+    if($VmSize.ToString().ToLower() -eq "custom"){
+      if (-Not ($VmProcessors -and $VmMemory)){
+        Write-Error "VmMemory and VmProcessors required for Custom VmSize" -ErrorAction Stop
+      }
+      $PSBoundParameters.Add("VmMemory", $VmMemory)
+      $PSBoundParameters.Add("VmProcessors", $VmProcessors)
+    } else {
+        if ($VmProcessors -or $VmMemory){
+          Write-Error "VmMemory and VmProcessors will be ignored. Please specify Custom for VMSize." -ErrorAction Continue
+          $null = $PSBoundParameters.Remove("VmProcessors")
+          $null = $PSBoundParameters.Remove("VmMemory")
         }
-        
-        $nic = Az.StackHciVM\Get-AzStackHciVMNetworkInterface  -ResourceId $NicId  -ErrorAction SilentlyContinue
+    }
+  }
+
+  if ($NicIds){
+    $NetworkProfileNetworkInterface =  [System.Collections.ArrayList]::new()
+    foreach ($NicId in $NicIds){
+      if ($NicId -notmatch $nicRegex){
+        Write-Error "Invalid Nic Id provided: $NicId." -ErrorAction Stop
+      }
+      
+      $nic = Az.StackHciVM\Get-AzStackHciVMNetworkInterface  -ResourceId $NicId -ErrorAction SilentlyContinue  
+      if ($nic -eq $null){
+        Write-Error "A Network Interface with id: $NicId does not exist." -ErrorAction Stop
+      }
+      
+      $NetworkInterface = @{Id = $NicId}
+      [void]$NetworkProfileNetworkInterface.Add($NetworkInterface)
+    }
+    $null = $PSBoundParameters.Remove("NicIds")
+    $PSBoundParameters.Add('NetworkProfileNetworkInterface', $NetworkProfileNetworkInterface)
+  } elseif ($NicNames){
+      $rg = $ResourceGroupName
+      if($NicResourceGroup){
+        $rg = $NicResourceGroup
+      }
+
+      $NetworkProfileNetworkInterface =  [System.Collections.ArrayList]::new()
+      foreach ($NicName in $NicNames){
+        $NicId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/networkinterfaces/$NicName"
+        $nic = Az.StackHciVM\Get-AzStackHciVMNetworkInterface -ResourceId $NicId  -ErrorAction SilentlyContinue
+   
         if ($nic -eq $null){
           Write-Error "A Network Interface with id: $NicId does not exist." -ErrorAction Stop
         }
-        
+      
         $NetworkInterface = @{Id = $NicId}
         [void]$NetworkProfileNetworkInterface.Add($NetworkInterface)
       }
-      $null = $PSBoundParameters.Remove("NicIds")
+      $null = $PSBoundParameters.Remove("NicNames")
+      $null = $PSBoundParameters.Remove("NicResourceGroup")
+
       $PSBoundParameters.Add('NetworkProfileNetworkInterface', $NetworkProfileNetworkInterface)
-    } elseif ($NicNames){
-        $rg = $ResourceGroupName
-        if($NicResourceGroup){
-          $rg = $NicResourceGroup
-        }
-
-        $NetworkProfileNetworkInterface =  [System.Collections.ArrayList]::new()
-        foreach ($NicName in $NicNames){
-          $NicId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/networkinterfaces/$NicName"
-         
-          $nic = Az.StackHciVM\Get-AzStackHciVMNetworkInterface -ResourceId $NicId  -ErrorAction SilentlyContinue
-          if ($nic -eq $null){
-            Write-Error "A Network Interface with id: $NicId does not exist." -ErrorAction Stop
-          }
-        
-          $NetworkInterface = @{Id = $NicId}
-          [void]$NetworkProfileNetworkInterface.Add($NetworkInterface)
-        }
-        $null = $PSBoundParameters.Remove("NicNames")
-        $null = $PSBoundParameters.Remove("NicResourceGroup")
-        
-        $PSBoundParameters.Add('NetworkProfileNetworkInterface', $NetworkProfileNetworkInterface)
+  }
+  if ($OsType.ToString().ToLower() -eq "windows"){
+    $PSBoundParameters['OsType'] = "Windows"
+    if($ComputerName){
+      if ($ComputerName.length -gt 15 -or $ComputerName -match $allDigitsRegex -or $ComputerName -match $invalidCharactersComputerName){
+        Write-Error "Invalid Computer Name : $ComputerName."
+      }
     }
+    if ($DisablePasswordAuthentication.IsPresent){
+      $null = $PSBoundParameters.Remove('DisablePasswordAuthentication')
+    }
+    $PSBoundParameters.Add("WindowConfigurationProvisionVMAgent", $ProvisionVMAgent.IsPresent)
+    $null = $PSBoundParameters.Remove("ProvisionVMAgent")
 
-    if ($OsType.ToString().ToLower() -eq "windows"){
-      $PSBoundParameters['OsType'] = "Windows"
-      if($ComputerName){
-        if ($ComputerName.length -gt 15 -or $ComputerName -match $allDigitsRegex -or $ComputerName -match $invalidCharactersComputerName){
-          Write-Error "Invalid Computer Name : $ComputerName."
-        }
+
+    if ($SshPublicKeys){
+      $WindowsConfigurationSshPublicKey = [System.Collections.ArrayList]::new()
+      foreach ($key in $SshPublicKeys){
+        $keyData = Get-Content -Path $key
+        $WindowsKey = @{KeyData = $keyData}
+        [void]$WindowsConfigurationSshPublicKey.Add($WindowsKey)
       }
-      if ($DisablePasswordAuthentication.IsPresent){
-        $null = $PSBoundParameters.Remove('DisablePasswordAuthentication')
+      $null = $PSBoundParameters.Remove('SshPublicKeys')
+      $PSBoundParameters.Add("WindowsConfigurationSshPublicKey", $WindowsConfigurationSshPublicKey)
+    }
+  } elseif ($OsType.ToString().ToLower() -eq "linux"){
+      $PSBoundParameters['OsType'] = "Linux"
+      if ($ComputerName.length -gt 64 -or $ComputerName -match $allDigitsRegex -or $ComputerName -match $invalidCharactersComputerName){
+        Write-Error "Invalid Computer Name : $ComputerName."
       }
-      $PSBoundParameters.Add("WindowConfigurationProvisionVMAgent", $ProvisionVMAgent.IsPresent)
+      if ($EnableAutomaticUpdates.IsPresent){
+        $null = $PSBoundParameters.Remove('EnableAutomaticUpdates')
+      }
+      if ($TimeZone){
+        $null = $PSBoundParameters.Remove('TimeZone')
+      }
+      $PSBoundParameters.Add("LinuxConfigurationProvisionVMAgent", $ProvisionVMAgent.IsPresent)
       $null = $PSBoundParameters.Remove("ProvisionVMAgent")
-
-
+      
       if ($SshPublicKeys){
-        $WindowsConfigurationSshPublicKey = [System.Collections.ArrayList]::new()
+        $LinuxConfigurationSshPublicKey = [System.Collections.ArrayList]::new()
         foreach ($key in $SshPublicKeys){
           $keyData = Get-Content -Path $key
-          $WindowsKey = @{KeyData = $keyData}
-          [void]$WindowsConfigurationSshPublicKey.Add($WindowsKey)
+          $LinuxKey = @{KeyData = $keyData}
+          [void]$LinuxConfigurationSshPublicKey.Add($LinuxKey)
         }
         $null = $PSBoundParameters.Remove('SshPublicKeys')
-        $PSBoundParameters.Add("WindowsConfigurationSshPublicKey", $WindowsConfigurationSshPublicKey)
+        $PSBoundParameters.Add("LinuxConfigurationSshPublicKey", $LinuxConfigurationSshPublicKey)
       }
-    } elseif ($OsType.ToString().ToLower() -eq "linux"){
-        $PSBoundParameters['OsType'] = "Linux"
-        if ($ComputerName.length -gt 64 -or $ComputerName -match $allDigitsRegex -or $ComputerName -match $invalidCharactersComputerName){
-          Write-Error "Invalid Computer Name : $ComputerName."
-        }
-        if ($EnableAutomaticUpdates.IsPresent){
-          $null = $PSBoundParameters.Remove('EnableAutomaticUpdates')
-        }
-        if ($TimeZone){
-          $null = $PSBoundParameters.Remove('TimeZone')
-        }
-        $PSBoundParameters.Add("LinuxConfigurationProvisionVMAgent", $ProvisionVMAgent.IsPresent)
-        $null = $PSBoundParameters.Remove("ProvisionVMAgent")
-        
-        if ($SshPublicKeys){
-          $LinuxConfigurationSshPublicKey = [System.Collections.ArrayList]::new()
-          foreach ($key in $SshPublicKeys){
-            $keyData = Get-Content -Path $key
-            $LinuxKey = @{KeyData = $keyData}
-            [void]$LinuxConfigurationSshPublicKey.Add($LinuxKey)
-          }
-          $null = $PSBoundParameters.Remove('SshPublicKeys')
-          $PSBoundParameters.Add("LinuxConfigurationSshPublicKey", $LinuxConfigurationSshPublicKey)
-        }
-    } else {
-       Write-Error "Invalid OSType provided: $OsType. Accepted Values are 'Windows' and 'Linux'" -ErrorAction Stop
-    }
+  } else {
+     Write-Error "Invalid OSType provided: $OsType. Accepted Values are 'Windows' and 'Linux'" -ErrorAction Stop
+  }
 
-    if($StoragePathId){
-      if($StoragePathId -notmatch $storagePathRegex){
-        Write-Error "Invalid StoragePathId: $StoragePathId" -ErrorAction Stop
+  if($StoragePathId){
+    if($StoragePathId -notmatch $storagePathRegex){
+      Write-Error "Invalid StoragePathId: $StoragePathId" -ErrorAction Stop
+    }
+  } elseif ($StoragePathName){
+      if ($StoragePathResourceGroup){
+          $ContainerId = "/subscriptions/$SubscriptionId/resourceGroups/$StoragePathResourceGroup/providers/Microsoft.AzureStackHCI/storagecontainers/$StoragePathName"
+      } else {
+          $ContainerId = "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.AzureStackHCI/storagecontainers/$StoragePathName"
       }
-    } elseif ($StoragePathName){
-        if ($StoragePathResourceGroup){
-            $ContainerId = "/subscriptions/$SubscriptionId/resourceGroups/$StoragePathResourceGroup/providers/Microsoft.AzureStackHCI/storagecontainers/$StoragePathName"
-        } else {
-            $ContainerId = "/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.AzureStackHCI/storagecontainers/$StoragePathName"
-        }
-        $PSBoundParameters.Add('StoragePathId', $ContainerId)
-        $null = $PSBoundParameters.Remove("StoragePathName")
-        $null = $PSBoundParameters.Remove("StoragePathReourceGroup")
+      $PSBoundParameters.Add('StoragePathId', $ContainerId)
+      $null = $PSBoundParameters.Remove("StoragePathName")
+      $null = $PSBoundParameters.Remove("StoragePathReourceGroup")
+  }
+
+
+  if ($DataDiskIds){
+    $StorageProfileDataDisk =  [System.Collections.ArrayList]::new()
+    foreach ($DataDiskId in $DataDiskIds){
+      if ($DataDiskId -notmatch $vhdRegex){
+        Write-Error "Invalid Data Disk Id provided: $DataDiskId." -ErrorAction Stop
+      }
+      $DataDisk = @{Id = $DataDiskId}
+      [void]$StorageProfileDataDisk.Add($DataDisk)
     }
-
-
-    if ($DataDiskIds){
+    $null = $PSBoundParameters.Remove("DataDiskIds")
+    $PSBoundParameters.Add('StorageProfileDataDisk',  $StorageProfileDataDisk)
+  } elseif ($DataDiskNames){
+      $rg = $ResourceGroupName
+      if($DataDiskResourceGroup){
+        $rg = $DataDiskResourceGroup
+      }
+     
       $StorageProfileDataDisk =  [System.Collections.ArrayList]::new()
-      foreach ($DataDiskId in $DataDiskIds){
-        if ($DataDiskId -notmatch $vhdRegex){
-          Write-Error "Invalid Data Disk Id provided: $DataDiskId." -ErrorAction Stop
-        }
+      foreach ($DataDiskName in $DataDiskNames){
+        $DataDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/virtualharddisks/$DataDiskName"
         $DataDisk = @{Id = $DataDiskId}
         [void]$StorageProfileDataDisk.Add($DataDisk)
       }
-      $null = $PSBoundParameters.Remove("DataDiskIds")
+      $null = $PSBoundParameters.Remove("DataDiskNames")
+      $null = $PSBoundParameters.Remove("DataDiskResourceGroup")
       $PSBoundParameters.Add('StorageProfileDataDisk',  $StorageProfileDataDisk)
-    } elseif ($DataDiskNames){
-        $rg = $ResourceGroupName
-        if($DataDiskResourceGroup){
-          $rg = $DataDiskResourceGroup
-        }
-       
-        $StorageProfileDataDisk =  [System.Collections.ArrayList]::new()
-        foreach ($DataDiskName in $DataDiskNames){
-          $DataDiskId = "/subscriptions/$SubscriptionId/resourceGroups/$rg/providers/Microsoft.AzureStackHCI/virtualharddisks/$DataDiskName"
-          $DataDisk = @{Id = $DataDiskId}
-          [void]$StorageProfileDataDisk.Add($DataDisk)
-        }
-        $null = $PSBoundParameters.Remove("DataDiskNames")
-        $null = $PSBoundParameters.Remove("DataDiskResourceGroup")
-        $PSBoundParameters.Add('StorageProfileDataDisk',  $StorageProfileDataDisk)
-    }
-
-    return Az.StackHciVM.internal\New-AzStackHciVMVirtualMachine @PSBoundParameters
-
+  }  
+  $resourceUri = "/subscriptions/" + $subscriptionId + "/resourceGroups/" + $resourceGroupName + "/providers/Microsoft.HybridCompute/machines/" + $Name
+  $PSBoundParameters.Add("ResourceUri", $resourceUri)
+  $PSBoundParameters.Add("CustomLocationId", $CustomLocationId)
+  $PSBoundParameters.Add("OSDiskOstype", $OSType)
+  $PSBoundParameters.Add('ImageId', $ImageId)
+  $PSBoundParameters.Add('VmSize', $VmSize)
+  if ($ComputerName){
+    $PSBoundParameters.Add('ComputerName', $ComputerName)
+  }
+  if ($AdminUsername){
+    $PSBoundParameters.Add('AdminUsername', $AdminUsername)
+  }
+  if ($AdminPassword){
+    $PSBoundParameters.Add('AdminPassword', $AdminPassword)
+  }
+  if ($DynamicMemoryMaximumMemory){
+    $PSBoundParameters.Add('DynamicMemoryMaximumMemory', $DynamicMemoryMaximumMemory)
+  }
+  if ($DynamicMemoryMinimumMemory){
+    $PSBoundParameters.Add('DynamicMemoryMinimumMemory', $DynamicMemoryMinimumMemory)
+  }
+  if ($DynamicMemoryTargetBuffer){
+    $PSBoundParameters.Add('DynamicMemoryTargetBuffer', $DynamicMemoryTargetBuffer)
+  }
+  if ($EnableTpm.IsPresent){
+    $PSBoundParameters.Add('EnableTpm', $EnableTpm)
+  }
+  IF($SecureBootEnabled.IsPresent){
+    $PSBoundParameters.Add('SecureBootEnabled', $SecureBootEnabled)
+  }
+  $null = $PSBoundParameters.Remove("Name")
+  $null = $PSBoundParameters.Remove("ResourceGroupName")
+  $null = $PSBoundParameters.Remove("SubscriptionId")
+  $null = $PSBoundParameters.Remove("ResourceId")
+  $null = $PSBoundParameters.Remove("NicResourceGroup")
+  $null = $PSBoundParameters.Remove("NicNames")
+  $null = $PSBoundParameters.Remove("Kind") 
+  $null = $PSBoundParameters.Remove("Location") 
+  $null = $PSBoundParameters.Remove("OSType")
+  $null = $PSBoundParameters.Remove("IdentityType")
+  return Az.StackHciVM.internal\New-AzStackHciVMVirtualMachine @PSBoundParameters
 }
+

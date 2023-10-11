@@ -1,6 +1,6 @@
 
 function Get-AzStackHciVMStoragePath_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IStorageContainers])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IStorageContainers])]
 [CmdletBinding(PositionalBinding=$false)]
 
 param(

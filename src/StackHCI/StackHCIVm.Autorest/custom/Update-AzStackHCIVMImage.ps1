@@ -1,6 +1,6 @@
 function Update-AzStackHciVMImage{
-    [OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IMarketplaceGalleryImages],ParameterSetName='Marketplace' )]
-    [OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IGalleryImages],ParameterSetName='GalleryImage' )]
+    [OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IMarketplaceGalleryImages],ParameterSetName='Marketplace' )]
+    [OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IGalleryImages],ParameterSetName='GalleryImage' )]
     [CmdletBinding(PositionalBinding=$false)]
    
   param(
@@ -34,7 +34,7 @@ function Update-AzStackHciVMImage{
     [Parameter(ParameterSetName='ByName')]
     [Parameter(ParameterSetName='ByResourceId')] 
     [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IGalleryImagesUpdateRequestTags]))]
+    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IGalleryImagesUpdateRequestTags]))]
     [System.Collections.Hashtable]
     # Resource tags
     ${Tags},

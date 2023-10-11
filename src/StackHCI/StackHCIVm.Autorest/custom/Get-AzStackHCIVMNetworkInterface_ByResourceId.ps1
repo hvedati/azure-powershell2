@@ -1,6 +1,6 @@
 
 function Get-AzStackHciVMNetworkInterface_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.INetworkInterfaces])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.INetworkInterfaces])]
 [CmdletBinding( PositionalBinding=$false)]
 param(
 

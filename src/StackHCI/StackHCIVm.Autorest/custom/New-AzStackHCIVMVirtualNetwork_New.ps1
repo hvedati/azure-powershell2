@@ -1,4 +1,4 @@
-
+<# 
 # ----------------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,8 +55,8 @@ SUBNET <IVirtualNetworkPropertiesSubnetsItem[]>: Subnet - list of subnets under 
 .Link
 https://learn.microsoft.com/powershell/module/az.StackHciVM/new-azStackHciVMvirtualnetwork
 #>
-function New-AzStackHciVMVirtualNetwork {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IVirtualNetworks])]
+<# function New-AzStackHciVMVirtualNetwork {
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.ILogicalNetworks])]
 [CmdletBinding( PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(Mandatory)]
@@ -364,3 +364,4 @@ param(
    
     return Az.StackHciVM.internal\New-AzStackHciVMVirtualNetwork @PSBoundParameters
 }
+ #> 

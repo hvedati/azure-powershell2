@@ -1,6 +1,6 @@
 
 function Update-AzStackHciVMStoragePath_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IStorageContainers])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IStorageContainers])]
 [CmdletBinding(PositionalBinding=$false)]
 
 param(
@@ -13,7 +13,7 @@ param(
 
     
     [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Category('Body')]
-    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IGalleryImagesUpdateRequestTags]))]
+    [Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Runtime.Info(PossibleTypes=([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IGalleryImagesUpdateRequestTags]))]
     [System.Collections.Hashtable]
     # Resource tags
     ${Tags},

@@ -44,7 +44,7 @@ IPCONFIGURATION <IIPConfiguration[]>: IPConfigurations - A list of IPConfigurati
 https://learn.microsoft.com/powershell/module/az.StackHciVM/new-azStackHciVMnetworkinterface
 #>
 function New-AzStackHciVMNetworkInterface {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.INetworkInterfaces])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.INetworkInterfaces])]
 [CmdletBinding(PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(Mandatory)]

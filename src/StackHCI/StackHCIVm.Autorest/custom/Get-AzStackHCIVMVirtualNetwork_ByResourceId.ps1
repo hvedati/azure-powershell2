@@ -1,6 +1,6 @@
-
+<# 
 function Get-AzStackHciVMVirtualNetwork_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IVirtualNetworks])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.ILogicalNetworks])]
 [CmdletBinding(PositionalBinding=$false)]
 
 param(
@@ -38,4 +38,4 @@ param(
         }
         
     }
-} 
+}  #>

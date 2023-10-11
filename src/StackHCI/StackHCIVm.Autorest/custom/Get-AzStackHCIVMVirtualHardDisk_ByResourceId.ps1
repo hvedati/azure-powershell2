@@ -1,6 +1,6 @@
 
 function Get-AzStackHciVMVirtualHardDisk_ByResourceId {
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IVirtualHardDisks])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IVirtualHardDisks])]
 [CmdletBinding( PositionalBinding=$false)]
 
 param(

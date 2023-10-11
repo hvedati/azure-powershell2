@@ -32,7 +32,7 @@ Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IStorage
 https://learn.microsoft.com/powershell/module/az.StackHciVM/new-azStackHciVMstoragecontainer
 #>
 function New-AzStackHciVMStoragePath{
-[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20221215Preview.IStorageContainers])]
+[OutputType([Microsoft.Azure.PowerShell.Cmdlets.StackHciVM.Models.Api20230901Preview.IStorageContainers])]
 [CmdletBinding(PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(Mandatory)]
