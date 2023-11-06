@@ -1,26 +1,18 @@
-### Example 1: Get a Storage Path
+### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmStoragePath -Name  "testStoragePath" -ResourceGroupName "test-rg"
-```
-```output
-Name            ResourceGroupName
-----            -----------------
-testStoragePath       test-rg
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command gets a specific storage path in the specified resource group. 
+{{ Add description here }}
 
-### Example 2: List all Storage Paths in a Resource Group
+### Example 2: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmStoragePath  -ResourceGroupName "test-rg"
-```
-```output
-Name            ResourceGroupName
-----            -----------------
-testStoragePath       test-rg
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command lists all storage paths in the specified resource group. 
-
-
+{{ Add description here }}
 

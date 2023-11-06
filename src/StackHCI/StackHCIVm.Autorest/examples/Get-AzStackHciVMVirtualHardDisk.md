@@ -1,26 +1,18 @@
-### Example 1: Get a Virtual Hard Disk
+### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmVirtualHardDisk -Name  "testVhd" -ResourceGroupName "test-rg"
-```
-```output
-Name            ResourceGroupName
-----            -----------------
-testVhd       test-rg
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command gets a specific virtual hard disk in the specified resource group. 
+{{ Add description here }}
 
-### Example 2: List all Virtual Hard Disks in a Resource Group
+### Example 2: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmVirtualHardDisk -ResourceGroupName "test-rg"
-```
-```output
-Name            ResourceGroupName
-----            -----------------
-testVhd       test-rg
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command lists all virtual hard disks in the specified resource group. 
-
-
+{{ Add description here }}
 

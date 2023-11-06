@@ -1,14 +1,18 @@
-### Example 1: Update a Virtual Hard Disk.
+### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Update-AzStackHCIVmVirtualHardDisk  -Name "testVhd" -ResourceGroupName "test-rg" -Tags @{TagName = TagValue }
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-```output
-Name            ResourceGroupName
-----            -----------------
-testVhd       test-rg
+{{ Add description here }}
+
+### Example 2: {{ Add title here }}
+```powershell
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command updates an exisiting virtual hard disk in the specified resource group.
-
+{{ Add description here }}
 

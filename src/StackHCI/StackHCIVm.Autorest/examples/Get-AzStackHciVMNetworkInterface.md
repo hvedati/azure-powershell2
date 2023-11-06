@@ -1,23 +1,18 @@
-### Example 1:  Get a Network Interface
+### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmNetworkInterface -Name "testNic" -ResourceGroupName "test-rg" 
-```
-```output
-Name            ResourceGroupName
-----            -----------------
-testNic       test-rg
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command gets a specific network interface in the specified resource group. 
+{{ Add description here }}
 
-### Example 2: List all Logical Networks in a Resource Group  
+### Example 2: {{ Add title here }}
 ```powershell
-PS C:\> Get-AzStackHCIVmNetworkInterface -ResourceGroupName 'test-rg'
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
-```output
-Name            ResourceGroupName
-----            -----------------
-testNic       test-rg
-```
-This command lists all network interfaces in the specified resource group. 
+
+{{ Add description here }}
 

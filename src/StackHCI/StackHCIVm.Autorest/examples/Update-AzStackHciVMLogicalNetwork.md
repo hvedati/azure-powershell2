@@ -1,13 +1,18 @@
-### Example 1: Update a Logical Network.
+### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Update-AzStackHCIVmVLogicalNetwork  -Name "testLnet" -ResourceGroupName "test-rg" -Tags @{TagName = TagValue }
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-```output
-Name            ResourceGroupName
-----            -----------------
-testLnet      test-rg
+{{ Add description here }}
+
+### Example 2: {{ Add title here }}
+```powershell
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 ```
 
-This command updates an exisiting logical network in the specified resource group.
+{{ Add description here }}
 
