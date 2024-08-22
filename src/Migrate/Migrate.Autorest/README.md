@@ -3,9 +3,6 @@
 This directory contains the PowerShell module for the Migrate service.
 
 ---
-## Status
-[![Az.Migrate](https://img.shields.io/powershellgallery/v/Az.Migrate.svg?style=flat-square&label=Az.Migrate "Az.Migrate")](https://www.powershellgallery.com/packages/Az.Migrate/)
-
 ## Info
 - Modifiable: yes
 - Generated: all
@@ -52,12 +49,12 @@ commit: 0dd49a444195fef7f3555cad038cb7665cbd928c
 require:
   - $(this-folder)/../../readme.azure.noprofile.md
 input-file:
-  - $(repo)/specification/migrate/resource-manager/Microsoft.OffAzure/stable/2020-01-01/migrate.json
-  - $(repo)/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
-  - $(repo)/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2023-01-01/service.json
-  - $(repo)/specification/recoveryservicesdatareplication/resource-manager/Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  # - $(repo)/specification/migrate/resource-manager/Microsoft.OffAzure/stable/2020-01-01/migrate.json
+  # - $(repo)/specification/migrateprojects/resource-manager/Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
+  # - $(repo)/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2023-01-01/service.json
+  - E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
 
-module-version: 1.0.1
+module-version: 3.0.8
 title: Migrate 
 subject-prefix: 'Migrate'
 
@@ -105,9 +102,9 @@ directive:
     - ReplicationProviderSpecificContainerMappingInput
     - ProtectionContainerMappingProviderSpecificDetails
     - MigrateProjectProperties
-    - FabricProperties
-    - FabricModelProperties
-    - FabricModelCustomProperties
+    # - FabricProperties
+    # - FabricModelProperties
+    # - FabricModelCustomProperties
     - AzStackHCIFabricModelCustomProperties
     - HyperVMigrateFabricModelCustomProperties
     - VMwareMigrateFabricModelCustomProperties
@@ -118,8 +115,8 @@ directive:
     - HyperVToAzStackHCIProtectedItemModelCustomProperties
     - VMwareToAzStackHCIProtectedItemModelCustomProperties
     - PlannedFailoverModelProperties
-    - WorkflowModelProperties
-    - WorkflowModelCustomProperties
+    - JobModelProperties
+    - JobModelCustomProperties
     - TaskModel
     - TaskModelCustomProperties
   # Remove variants not in scope
@@ -243,7 +240,7 @@ directive:
     remove: true
   - from: Microsoft.OffAzure/stable/2020-01-01/migrate.json
     where:
-      subject: ^Job|^VMwareOperationsStatus
+      subject: ^VMwareOperationsStatus
     remove: true
   - from: Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
     where:
@@ -331,32 +328,32 @@ directive:
       verb: New|Remove|Update
       subject: ^HyperV
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Test|Invoke
       subject: NameAvailability$|DeploymentPreflight
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Get|New
       subject: ^EmailConfiguration
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Get
       subject: ^(Dra|ProtectedItem|Vault|Workflow)OperationStatus$
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Get
       subject: ^FabricOperationsStatus$
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: New
       subject: ^(Dra|Vault)
     remove: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Update
       subject: ^Vault
@@ -367,12 +364,18 @@ directive:
       subject: ^PlannedReplication
     remove: true
   # Rename cmdlets for AzStackHCI
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Get
-      subject: ^Fabric$
+      subject: ^FabricModel$
     set:
       subject: HCIReplicationFabric
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
+    where:
+      verb: Get
+      subject: ^JobModel$
+    set:
+      subject: HCIReplicationJob
   # Hide cmldets used by custom
   - from: Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
     where:
@@ -467,7 +470,7 @@ directive:
       verb: New$
       variant: ^CreateViaIdentity
     hide: true
-  - from: Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - from: E:\azure-rest-api-specs-pr\specification\recoveryservicesdatareplication\resource-manager\Microsoft.DataReplication\stable\2024-09-01\recoveryservicesdatareplication.json
     where:
       verb: Get$|Invoke$|New$|Remove$|Test$|Update$
       subject: ^Dra|^Fabric|^Policy|^EmailConfiguration|^ProtectedItem|^ReplicationExtension|^Vault|^Workflow
